@@ -5,8 +5,14 @@ Based on Rails routes of APP_CLASS
 # root is this
 root = (exports ? this)
 
-ParameterMissing = (@message) -> #
-ParameterMissing:: = new Error()
+ParameterMissing = (message) ->
+  @message = message
+  @name = 'ParameterMissing'
+  @stack = (new Error()).stack;
+  return
+ParameterMissing:: = Object.create(Error.prototype)
+ParameterMissing::constructor = ParameterMissing
+
 defaults =
   prefix: "PREFIX"
   default_url_options: DEFAULT_URL_OPTIONS
